@@ -14,7 +14,6 @@ class APIFeatures {
     const excludedFields = ['page', 'sort', 'limit', 'fields'];
     excludedFields.forEach(el => delete queryObj[el]);
 
-    // Advanced filtering with operators ($gt, $gte, etc)
     let queryStr = JSON.stringify(queryObj);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
 
