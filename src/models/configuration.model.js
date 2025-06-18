@@ -64,4 +64,4 @@ configurationSchema.pre(/^find/, function(next) {
 
 const Configuration = mongoose.model('Configuration', configurationSchema);
 
-module.exports = C
+module.exports = Configuration;

@@ -9,7 +9,6 @@ const catchAsync = require('../utils/catchAsync');
  * Middleware to protect routes - requires valid JWT
  */
 exports.protect = catchAsync(async (req, res, next) => {
-  // 1) Check if token exists
   let token;
   if (
     req.headers.authorization &&
@@ -24,10 +23,8 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  // 2) Verify token
   const decoded = await promisify(jwt.verify)(token, config.jwtSecret);
 
-  // 3) Check if user still exists
   const currentUser = await User.findById(decoded.id);
   if (!currentUser) {
     return next(
@@ -38,14 +35,12 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  // 4) Check if user changed password after the token was issued
   if (currentUser.changedPasswordAfter(decoded.iat)) {
     return next(
       new AppError('User recently changed password. Please log in again.', 401)
     );
   }
 
-  // GRANT ACCESS TO PROTECTED ROUTE
   req.user = currentUser;
   next();
 });

@@ -15,7 +15,6 @@ const logger = winston.createLogger({
   format: logFormat,
   defaultMeta: { service: 'node-api' },
   transports: [
-    // Console logger
     new winston.transports.Console({
       format: winston.format.combine(
         winston.format.colorize(),
@@ -24,12 +23,10 @@ const logger = winston.createLogger({
         )
       ),
     }),
-    // File logger - Error level
     new winston.transports.File({ 
       filename: 'logs/error.log', 
       level: 'error' 
     }),
-    // File logger - All levels
     new winston.transports.File({ 
       filename: 'logs/combined.log' 
     })
