@@ -56,7 +56,7 @@ const swaggerOptions = {
     info: {
       title: 'Node API',
       version: '1.0.0',
-      description: 'A professional Node.js REST API',
+      description: 'API M2 - Teacher : Nicolas CHEVALIER',
     },
     servers: [
       {
